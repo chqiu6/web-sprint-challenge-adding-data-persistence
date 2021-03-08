@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) =>{
     try {
     const resourceData = await resourceModel.getAll()
     res.status(200).json(resourceData)
+    console.log("Our resource ", resourceData)
     } catch(err) {
         next(err);
     }

@@ -16,6 +16,13 @@ const router = express.Router();
 router.get("/", async (req, res, next) =>{
     try {
     const taskData = await taskModel.getAll()
+    taskData.map(item => {
+        console.log("looking at our items", item.task_completed);
+         item.task_completed === 0 
+         ? {... item, task_completed : item.task_completed = false} 
+         : {...item, task_completed : item.task_completed  = true};
+    })
+    console.log("Our tasks" , taskData)
     res.status(200).json(taskData)
     } catch(err) {
         next(err);

@@ -15,6 +15,23 @@ const router = express.Router();
 router.get("/", async (req, res, next) =>{
     try {
     const projectData = await projectModel.getAll()
+     projectData.map(item => {
+        console.log("looking at our items", item.project_completed);
+         item.project_completed === 0 
+         ? {... item, project_completed : item.project_completed = false} 
+         : {...item, project_completed : item.project_completed  = true};
+    })
+    // projectData.map(item => {
+    //     if(item.project_completed = 0 ) {
+    //         return {
+    //             ...item, project_completed : false
+    //         }
+    //     } else {
+    //         return {
+    //             ...item, project_completed : true
+    //         }
+    //     }
+    // })
     console.log("What's our data looking like ? ", projectData)
     res.status(200).json(projectData)
     } catch(err) {
